@@ -1,4 +1,5 @@
 var moment = require('moment');
+const { execSync } = require('child_process');
 
 module.exports = {
   toGb: function (value) {
@@ -16,14 +17,22 @@ module.exports = {
 
     return formatted;
   },
-  formatUptime: function(uptime) {
-    const duration = moment.duration(uptime, 'seconds');
+  formatUptime: function() {
+    let uptime = execSync("uptime | awk -F' ' ' { print $3 \" \" $5} ' | sed 's/:/ /' | sed 's/,//'", function (error, stdout, stderr) {
+      if (error) {
+        console.error(`exec error: ${error}`);
+        return;
+      }
+      return stdout;
+    }).toString().replace(/\n$/, '');
+
+    // const duration = moment.duration(uptime, 'seconds');
     const result = {
         seconds: uptime,
-        minutes: duration.minutes(),
-        hours: duration.hours(),
-        days: duration.days(),
-        string: duration.days() + ' days, ' + duration.hours() + ' hours, ' + duration.minutes() + ' minutes and ' + duration.seconds() + ' seconds' ,
+        minutes: uptime.split(' ')[2],
+        hours: uptime.split(' ')[1],
+        days: uptime.split(' ')[0],
+        string: uptime.split(' ')[0] + ' days, ' + uptime.split(' ')[1] + ' hours and ' + uptime.split(' ')[2] + ' minutes' ,
     };
     return result;
   },

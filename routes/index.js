@@ -43,14 +43,17 @@ router.get('/general', function(req, res, next) {
         total: util.toGb(info.total),
       };
     }
+  });
 
-});
+
+
+
 
   const general = {
     hostname: os.hostname(),
     disk: diskData,
     platform: os.platform(),
-    uptime: util.formatUptime(os.uptime()),
+    uptime: util.formatUptime(),
     cpus: {usage: util.formatCpuUsage(os.loadavg()), cpus: os.cpus()},
     freememory: util.toMb(os.freemem()),
   };
