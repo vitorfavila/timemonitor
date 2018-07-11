@@ -55,8 +55,8 @@ router.get('/general', function(req, res, next) {
     freememory: util.toMb(os.freemem()),
   };
 
-  let mail = new SendMail();
-  mail.send(general.hostname, '<h3>Test</h3>');
+  // let mail = new SendMail();
+  // mail.send(general.hostname, '<h3>Test</h3>');
 
   res.send(general);
 
