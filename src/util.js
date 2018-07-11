@@ -24,6 +24,7 @@ module.exports = {
         hours: duration.hours(),
         days: duration.days(),
         string: duration.days() + ' days, ' + duration.hours() + ' hours, ' + duration.minutes() + ' minutes and ' + duration.seconds() + ' seconds' ,
+        unix: moment.unix(uptime),
     };
     return result;
   },
