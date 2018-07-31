@@ -56,6 +56,7 @@ router.get('/general', function(req, res, next) {
     uptime: util.formatUptime(),
     cpus: {usage: util.formatCpuUsage(os.loadavg()), cpus: os.cpus()},
     freememory: util.toMb(os.freemem()),
+    networking: os.networkInterfaces(),
   };
 
   // let mail = new SendMail();
