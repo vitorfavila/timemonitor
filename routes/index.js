@@ -9,27 +9,27 @@ const os = require('os');
 let diskpath = os.platform() === 'win32' ? 'c:' : '/';
 
 /* GET home page. */
+// router.get('/', function(req, res, next) {
+
+//   disk.check(diskpath, function(err, info) {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         res.send(info);
+//     }
+//   });
+
+// });
+
+// router.get('/cpu', function(req, res, next) {
+
+//   const avg = os.loadavg();
+//   // console.log(util.formatCpuUsage(avg));
+//   res.send(util.formatCpuUsage(avg));
+
+// });
+
 router.get('/', function(req, res, next) {
-
-  disk.check(diskpath, function(err, info) {
-    if (err) {
-        console.log(err);
-    } else {
-        res.send(info);
-    }
-  });
-
-});
-
-router.get('/cpu', function(req, res, next) {
-
-  const avg = os.loadavg();
-  // console.log(util.formatCpuUsage(avg));
-  res.send(util.formatCpuUsage(avg));
-
-});
-
-router.get('/general', function(req, res, next) {
 
   let diskData = {};
   disk.check(diskpath, function(err, info) {
@@ -44,10 +44,6 @@ router.get('/general', function(req, res, next) {
       };
     }
   });
-
-
-
-
 
   const general = {
     hostname: os.hostname(),
